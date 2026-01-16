@@ -1,0 +1,35 @@
+﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
+using PaymentCard.Data.Repositories;
+using PaymentCard.Domain;
+using SharedKernel.Interfaces;
+using static PaymentCard.Data.Commands.Commands;
+
+namespace PaymentCard.Data.CommandHandlers
+{
+    public class CardCreateCommandHandler : ICommandHandler<CardCreateCommand>
+    {
+        private readonly ILogger<CardCreateCommandHandler> _logger;
+        private readonly ICardRepository _cardRepository;
+        private readonly IMapper _mapper;
+
+        public CardCreateCommandHandler(
+            ILogger<CardCreateCommandHandler> logger,
+            ICardRepository cardRepository,
+            IMapper mapper)
+        {
+            _logger = logger;
+            _cardRepository = cardRepository;
+            _mapper = mapper;
+        }
+
+        public async Task Handle(CardCreateCommand request, CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("{Handler}.{Action}( start", nameof(CardCreateCommandHandler), nameof(Handle));
+
+            var data = _mapper.Map<Card>(request.card);
+            _cardRepository.Create(data);
+            await _cardRepository.SaveAsync();
+        }
+    }
+}

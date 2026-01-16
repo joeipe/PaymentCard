@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="PaymentCard.API/PaymentCard.API.csproj" />
+  <Project Path="PaymentCard.Contracts/PaymentCard.Contracts.csproj" />
+  <Project Path="PaymentCard.Data/PaymentCard.Data.csproj" />
+  <Project Path="PaymentCard.Domain/PaymentCard.Domain.csproj" />
+  <Project Path="SharedKernel/SharedKernel.csproj" />
+</Solution>
