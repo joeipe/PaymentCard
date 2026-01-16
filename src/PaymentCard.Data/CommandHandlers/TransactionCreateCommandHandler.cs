@@ -3,9 +3,6 @@ using Microsoft.Extensions.Logging;
 using PaymentCard.Data.Repositories;
 using PaymentCard.Domain;
 using SharedKernel.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using static PaymentCard.Data.Commands.Commands;
 
 namespace PaymentCard.Data.CommandHandlers

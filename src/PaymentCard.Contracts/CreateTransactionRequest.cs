@@ -1,8 +1,5 @@
 ﻿using PaymentCard.Contracts.Validations;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace PaymentCard.Contracts
 {
@@ -13,7 +10,7 @@ namespace PaymentCard.Contracts
         public string Description { get; set; } = default!;
 
         [Required]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [ValidDate(ErrorMessage = "TransactionDate must be a valid date.")]
         public DateTime TransactionDate { get; set; }
 

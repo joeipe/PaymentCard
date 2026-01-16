@@ -9,6 +9,6 @@ namespace PaymentCard.Data.Queries
         public record GetCardByIdQuery(int Id) : IQuery<CardResponse>;
 
         public record GetTransactionsQuery() : IQuery<List<TransactionResponse>>;
-        public record GetTransactionByIdQuery(int Id) : IQuery<TransactionResponse>;
+        public record GetTransactionByIdQuery(int Id, string? currency) : IQuery<TransactionResponse>;
     }
 }

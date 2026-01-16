@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
 using PaymentCard.Contracts;
-using PaymentCard.Data.CommandHandlers;
 using PaymentCard.Data.Repositories;
 using SharedKernel.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using static PaymentCard.Data.Queries.Queries;
 
 namespace PaymentCard.Data.QueryHandlers

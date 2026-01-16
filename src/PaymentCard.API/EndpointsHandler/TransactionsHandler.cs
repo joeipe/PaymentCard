@@ -19,9 +19,10 @@ namespace PaymentCard.API.EndpointsHandler
 
         public static async Task<Results<NotFound, Ok<TransactionResponse>>> GetTransactiosByIdAsync(
             IMediator mediator,
-            int id)
+            int id,
+            string? currency)
         {
-            var query = new GetTransactionByIdQuery(id);
+            var query = new GetTransactionByIdQuery(id, currency);
             var result = await mediator.Send(query);
 
             return result is not null ? TypedResults.Ok(result) : TypedResults.NotFound();

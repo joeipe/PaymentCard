@@ -1,8 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using PaymentCard.Domain;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PaymentCard.Data.Repositories
 {

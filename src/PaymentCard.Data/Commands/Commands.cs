@@ -10,6 +10,5 @@ namespace PaymentCard.Data.Commands
         public record CardDeleteCommand(int Id) : ICommand { }
 
         public record TransactionCreateCommand(CreateTransactionRequest transaction) : ICommand { }
-        
     }
 }

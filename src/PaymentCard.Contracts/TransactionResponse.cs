@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PaymentCard.Contracts
+﻿namespace PaymentCard.Contracts
 {
     public class TransactionResponse
     {

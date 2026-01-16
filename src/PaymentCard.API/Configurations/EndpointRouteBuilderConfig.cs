@@ -31,10 +31,10 @@ namespace PaymentCard.API.Configurations
             var transactionsEndpoints = endpoints.MapGroup("/transactions");
 
             transactionsEndpoints.MapGet("", TransactionsHandler.GetTransactiosAsync)
-                .WithSummary("Get all cards");
+                .WithSummary("Get all transactions");
 
             transactionsEndpoints.MapGet("/{id:int}", TransactionsHandler.GetTransactiosByIdAsync)
-                .WithSummary("Get a card by providing an id");
+                .WithSummary("Get a transaction by providing an id");
 
             transactionsEndpoints.MapPost("", TransactionsHandler.CreateTransactionAsync)
                 .ProducesValidationProblem(400)

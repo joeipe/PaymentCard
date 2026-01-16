@@ -1,7 +1,9 @@
 using PaymentCard.API.Configurations;
 using PaymentCard.Data.Queries;
 using PaymentCard.Data.Repositories;
+using PaymentCard.Data.Services;
 using Serilog;
+using System.Net.Http.Headers;
 
 public partial class Program
 {
@@ -32,6 +34,14 @@ public partial class Program
             builder.Services.AddAutoMapperConfiguration();
             builder.Services.AddScoped<ICardRepository, CardRepository>();
             builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+            builder.Services.AddHttpClient<ICurrencyService, CurrencyService>(client =>
+            {
+                client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiClient:TreasuryUri") ?? throw new ArgumentNullException("ApiClient:TreasuryUri"));
+                client.Timeout = new TimeSpan(0, 0, 30);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            });
+
             builder.Services.AddExceptionConfiguration();
 
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
