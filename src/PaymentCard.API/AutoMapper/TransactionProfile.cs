@@ -8,7 +8,10 @@ namespace PaymentCard.API.AutoMapper
     {
         public TransactionProfile()
         {
-            CreateMap<PurchaseTransaction, TransactionResponse>();
+            CreateMap<PurchaseTransaction, TransactionBaseResponse>()
+                .ForMember(dest => dest.OriginalUsdAmount, opt => opt.MapFrom(src => src.Amount));
+            CreateMap<PurchaseTransaction, TransactionResponse>()
+                .ForMember(dest => dest.OriginalUsdAmount, opt => opt.MapFrom(src => src.Amount));
             CreateMap<CreateTransactionRequest, PurchaseTransaction>();
         }
     }

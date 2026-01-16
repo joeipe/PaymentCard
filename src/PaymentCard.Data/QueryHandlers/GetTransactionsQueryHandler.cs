@@ -7,7 +7,7 @@ using static PaymentCard.Data.Queries.Queries;
 
 namespace PaymentCard.Data.QueryHandlers
 {
-    public class GetTransactionsQueryHandler : IQueryHandler<GetTransactionsQuery, List<TransactionResponse>>
+    public class GetTransactionsQueryHandler : IQueryHandler<GetTransactionsQuery, List<TransactionBaseResponse>>
     {
         private readonly ILogger<GetTransactionsQueryHandler> _logger;
         private readonly ITransactionRepository _transactionRepository;
@@ -24,13 +24,13 @@ namespace PaymentCard.Data.QueryHandlers
             _mapper = mapper;
         }
 
-        public async Task<List<TransactionResponse>> Handle(GetTransactionsQuery request, CancellationToken cancellationToken)
+        public async Task<List<TransactionBaseResponse>> Handle(GetTransactionsQuery request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("{Handler}.{Action} start", nameof(GetCardsQueryHandler), nameof(Handle));
 
             var data = await _transactionRepository.GetAllAsync();
 
-            var vm = _mapper.Map<List<TransactionResponse>>(data);
+            var vm = _mapper.Map<List<TransactionBaseResponse>>(data);
             return vm;
         }
     }

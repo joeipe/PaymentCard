@@ -7,8 +7,9 @@ namespace PaymentCard.Data.Queries
     {
         public record GetCardsQuery() : IQuery<List<CardResponse>>;
         public record GetCardByIdQuery(int Id) : IQuery<CardResponse>;
+        public record GetCardBalanceQuery(int Id, string? currency) : IQuery<CardBalanceResponse>;
 
-        public record GetTransactionsQuery() : IQuery<List<TransactionResponse>>;
+        public record GetTransactionsQuery() : IQuery<List<TransactionBaseResponse>>;
         public record GetTransactionByIdQuery(int Id, string? currency) : IQuery<TransactionResponse>;
     }
 }

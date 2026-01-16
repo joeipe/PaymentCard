@@ -27,6 +27,17 @@ namespace PaymentCard.API.EndpointsHandler
             return result is not null ? TypedResults.Ok(result) : TypedResults.NotFound();
         }
 
+        public static async Task<Results<NotFound, Ok<CardBalanceResponse>>> GetCardBalanceAsync(
+            IMediator mediator,
+            int id,
+            string? currency)
+        {
+            var query = new GetCardBalanceQuery(id, currency);
+            var result = await mediator.Send(query);
+
+            return result is not null ? TypedResults.Ok(result) : TypedResults.NotFound();
+        }
+
         public static async Task<NoContent> CreateCardAsync(
            IMediator mediator,
            CreateCardRequest value)

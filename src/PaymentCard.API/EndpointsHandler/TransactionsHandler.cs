@@ -8,7 +8,7 @@ namespace PaymentCard.API.EndpointsHandler
 {
     public static class TransactionsHandler
     {
-        public static async Task<Ok<List<TransactionResponse>>> GetTransactiosAsync(
+        public static async Task<Ok<List<TransactionBaseResponse>>> GetTransactiosAsync(
            IMediator mediator)
         {
             var query = new GetTransactionsQuery();

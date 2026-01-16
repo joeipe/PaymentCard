@@ -12,7 +12,10 @@ namespace PaymentCard.API.Configurations
                 .WithSummary("Get all cards");
 
             cardsEndpoints.MapGet("/{id:int}", CardsHandler.GetCardsByIdAsync)
-                .WithSummary("Get a card by providing an id");
+                .WithSummary("Get a card by providing an Id");
+
+            cardsEndpoints.MapGet("/{id:int}/balance", CardsHandler.GetCardBalanceAsync)
+                .WithSummary("Get a card balance by providing an Id and optionally convert the amount using Treasury historical exchange rates");
 
             cardsEndpoints.MapPost("", CardsHandler.CreateCardAsync)
                 .ProducesValidationProblem(400)
@@ -34,7 +37,7 @@ namespace PaymentCard.API.Configurations
                 .WithSummary("Get all transactions");
 
             transactionsEndpoints.MapGet("/{id:int}", TransactionsHandler.GetTransactiosByIdAsync)
-                .WithSummary("Get a transaction by providing an id");
+                .WithSummary("Get a transaction by providing an Id and optionally convert the amount using Treasury historical exchange rates");
 
             transactionsEndpoints.MapPost("", TransactionsHandler.CreateTransactionAsync)
                 .ProducesValidationProblem(400)
