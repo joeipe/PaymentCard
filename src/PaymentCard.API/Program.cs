@@ -34,6 +34,7 @@ public partial class Program
             builder.Services.AddAutoMapperConfiguration();
             builder.Services.AddScoped<ICardRepository, CardRepository>();
             builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+            builder.Services.AddScoped<ICurrencyConversionService, CurrencyConversionService>();
             builder.Services.AddHttpClient<ICurrencyService, CurrencyService>(client =>
             {
                 client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiClient:TreasuryUri") ?? throw new ArgumentNullException("ApiClient:TreasuryUri"));

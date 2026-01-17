@@ -3,10 +3,8 @@ using Microsoft.Extensions.Logging;
 using PaymentCard.Contracts;
 using PaymentCard.Data.Repositories;
 using PaymentCard.Data.Services;
-using SharedKernel.Extensions;
 using SharedKernel.Interfaces;
 using static PaymentCard.Data.Queries.Queries;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace PaymentCard.Data.QueryHandlers
 {
@@ -14,19 +12,19 @@ namespace PaymentCard.Data.QueryHandlers
     {
         private readonly ILogger<GetTransactionByIdQueryHandler> _logger;
         private readonly ITransactionRepository _transactionRepository;
-        private readonly ICurrencyService _currencyService;
+        private readonly ICurrencyConversionService _currencyConversionService;
         private readonly IMapper _mapper;
 
         public GetTransactionByIdQueryHandler(
 
             ILogger<GetTransactionByIdQueryHandler> logger,
             ITransactionRepository transactionRepository,
-            ICurrencyService currencyService,
+            ICurrencyConversionService currencyConversionService,
             IMapper mapper)
         {
             _logger = logger;
             _transactionRepository = transactionRepository;
-            _currencyService = currencyService;
+            _currencyConversionService = currencyConversionService;
             _mapper = mapper;
         }
 
@@ -40,22 +38,11 @@ namespace PaymentCard.Data.QueryHandlers
 
             if (data is not null && !string.IsNullOrWhiteSpace(request.currency))
             {
-                var exchangeRateResult = await _currencyService.GetExchangeRatesAsync();
-
-                var cutoffDate = data.TransactionDate.AddMonths(-6);
-
-                var selectedRate = exchangeRateResult?
-                    .Where(r => r.CountryCurrencyDescription.ToLower() == request.currency.ToLower())
-                    .Where(r => r.RecordDate <= data.TransactionDate)
-                    .Where(r => r.RecordDate >= cutoffDate)
-                    .OrderByDescending(r => r.RecordDate)
-                    .FirstOrDefault();
-                _logger.LogInformation(selectedRate?.OutputJson());
-
-                vm.ExchangeRateUsed = selectedRate?.ExchangeRate;
-                vm.ConvertedAmount = selectedRate is not null? Math.Round(data.Amount * selectedRate.ExchangeRate, 2, MidpointRounding.AwayFromZero) : null;
-                vm.TargetCurrency = request.currency.ToUpperInvariant();
-                vm.ErrorMessage = selectedRate is null ? $"No exchange rate found for currency {request.currency} within 6 months prior to transaction date." : null;
+                var conversionResult = await _currencyConversionService.ConvertTransactionsToCurrencyAsync(request.currency, data);
+                vm.ExchangeRateUsed = conversionResult.exchangeRateUsed;
+                vm.ConvertedAmount = conversionResult.convertedAmount;
+                vm.TargetCurrency = conversionResult.targetCurrency;
+                vm.ErrorMessage = conversionResult.errorMessage;
             }
 
             return vm;

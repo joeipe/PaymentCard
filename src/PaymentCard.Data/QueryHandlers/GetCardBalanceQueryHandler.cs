@@ -4,9 +4,6 @@ using PaymentCard.Contracts;
 using PaymentCard.Data.Repositories;
 using PaymentCard.Data.Services;
 using SharedKernel.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using static PaymentCard.Data.Queries.Queries;
 
 namespace PaymentCard.Data.QueryHandlers
@@ -15,18 +12,18 @@ namespace PaymentCard.Data.QueryHandlers
     {
         private readonly ILogger<GetCardBalanceQueryHandler> _logger;
         private readonly ICardRepository _cardRepository;
-        private readonly ICurrencyService _currencyService;
+        private readonly ICurrencyConversionService _currencyConversionService;
         private readonly IMapper _mapper;
 
         public GetCardBalanceQueryHandler(
             ILogger<GetCardBalanceQueryHandler> logger,
             ICardRepository cardRepository,
-            ICurrencyService currencyService,
+            ICurrencyConversionService currencyConversionService,
             IMapper mapper)
         {
             _logger = logger;
             _cardRepository = cardRepository;
-            _currencyService = currencyService;
+            _currencyConversionService = currencyConversionService;
             _mapper = mapper;
         }
 
@@ -40,34 +37,15 @@ namespace PaymentCard.Data.QueryHandlers
 
             var availableBalanceInUsd = data.CreditLimit - data.Transactions.Sum(t => t.Amount);
             vm.AvailableBalanceInUsd = Math.Round(availableBalanceInUsd, 2, MidpointRounding.AwayFromZero);
+            // to calculate the converted available balance i need to know which transaction date to consider
 
             if (data is not null && !string.IsNullOrWhiteSpace(request.currency))
             {
-                var exchangeRateResult = await _currencyService.GetExchangeRatesAsync();
-
-                var convertedAmount = 0.0m;
-                foreach (var transaction in data.Transactions)
-                {
-                    var cutoffDate = transaction.TransactionDate.AddMonths(-6);
-
-                    var selectedRate = exchangeRateResult?
-                        .Where(r => r.CountryCurrencyDescription.ToLower() == request.currency.ToLower())
-                        .Where(r => r.RecordDate <= transaction.TransactionDate)
-                        .Where(r => r.RecordDate >= cutoffDate)
-                        .OrderByDescending(r => r.RecordDate)
-                        .FirstOrDefault();
-
-                    convertedAmount += selectedRate is not null ? Math.Round(transaction.Amount * selectedRate.ExchangeRate, 2, MidpointRounding.AwayFromZero) : 0.0m;
-
-                    if (selectedRate is null)
-                    {
-                        convertedAmount = 0.0m;
-                        break;
-                    }
-                }
-                vm.AvailableBalanceConverted = Math.Round(convertedAmount, 2, MidpointRounding.AwayFromZero);
-                vm.TargetCurrency = request.currency.ToUpperInvariant();
-                vm.ErrorMessage = convertedAmount == 0.0m ? $"No exchange rates found for currency {request.currency} within 6 months prior to transaction dates." : null;
+                var conversionResult = await _currencyConversionService.ConvertTransactionsToCurrencyAsync(request.currency, data.Transactions);
+                vm.ExchangeRateUsed = conversionResult.exchangeRateUsed;
+                vm.TotalConvertedAmount = conversionResult.convertedAmount;
+                vm.TargetCurrency = conversionResult.targetCurrency;
+                vm.ErrorMessage = conversionResult.errorMessage;
             }
 
             return vm;
