@@ -53,7 +53,7 @@ namespace PaymentCard.Data.Services
         }
 
         public async Task<(decimal? exchangeRateUsed, decimal? convertedAmount, string? targetCurrency, string? errorMessage)> ConvertAmountToCurrencyAsync(
-            string targetCurrency, 
+            string targetCurrency,
             decimal amount,
             DateTime transactionDate)
         {

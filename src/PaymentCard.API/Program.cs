@@ -21,9 +21,12 @@ public partial class Program
 
             builder.Services.AddValidation();
 
-            builder.Host.UseSerilog((ctx, lc) => lc
+            if (!IsRunningIntegrationTests())
+            {
+                builder.Host.UseSerilog((ctx, lc) => lc
                 .WriteTo.Console()
                 .ReadFrom.Configuration(ctx.Configuration));
+            }
 
             // Add services to the container.
             builder.Services.AddMediatR(cfg =>
@@ -37,7 +40,7 @@ public partial class Program
             builder.Services.AddScoped<ICurrencyConversionService, CurrencyConversionService>();
             builder.Services.AddHttpClient<ICurrencyService, CurrencyService>(client =>
             {
-                client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiClient:TreasuryUri") ?? throw new ArgumentNullException("ApiClient:TreasuryUri"));
+                client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiClient:TreasuryUri") ?? "http://localhost");
                 client.Timeout = new TimeSpan(0, 0, 30);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -59,7 +62,10 @@ public partial class Program
             app.RegisterCardsEndpoints();
             app.RegisterTransactionsEndpoints();
 
-            app.ApplyDatabaseSchema(app.Environment);
+            if (!IsRunningIntegrationTests())
+            {
+                app.ApplyDatabaseSchema(app.Environment);
+            }
 
             app.Run();
         }
@@ -72,5 +78,12 @@ public partial class Program
             Log.Information("Shut down complete");
             Log.CloseAndFlush();
         }
+    }
+
+    private static bool IsRunningIntegrationTests()
+    {
+        return AppDomain.CurrentDomain
+            .GetAssemblies()
+            .Any(a => a.FullName!.StartsWith("Microsoft.AspNetCore.Mvc.Testing"));
     }
 }

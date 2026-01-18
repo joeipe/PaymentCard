@@ -32,7 +32,6 @@ namespace PaymentCard.Data.CommandHandlers
                 _mapper.Map(request.card, data);
                 await _cardRepository.SaveAsync();
             }
-            
         }
     }
 }

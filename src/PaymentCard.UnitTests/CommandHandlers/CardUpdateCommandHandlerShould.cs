@@ -7,9 +7,6 @@ using PaymentCard.Contracts;
 using PaymentCard.Data.CommandHandlers;
 using PaymentCard.Data.Repositories;
 using PaymentCard.Domain;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using static PaymentCard.Data.Commands.Commands;
 
 namespace PaymentCard.UnitTests.CommandHandlers

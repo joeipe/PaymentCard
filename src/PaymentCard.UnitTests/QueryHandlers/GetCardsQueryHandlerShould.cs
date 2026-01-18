@@ -7,9 +7,6 @@ using PaymentCard.API.AutoMapper;
 using PaymentCard.Data.QueryHandlers;
 using PaymentCard.Data.Repositories;
 using PaymentCard.Domain;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using static PaymentCard.Data.Queries.Queries;
 
 namespace PaymentCard.UnitTests.QueryHandlers

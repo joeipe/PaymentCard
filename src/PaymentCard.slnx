@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/Tests/">
+    <Project Path="PaymentCard.IntegrationTests/PaymentCard.IntegrationTests.csproj" Id="c4806ccf-f6c8-4585-a8a2-6dfc665adc0b" />
     <Project Path="PaymentCard.UnitTests/PaymentCard.UnitTests.csproj" Id="4102271f-ed54-4bcb-93a5-3c9966853128" />
   </Folder>
   <Project Path="PaymentCard.API/PaymentCard.API.csproj" />

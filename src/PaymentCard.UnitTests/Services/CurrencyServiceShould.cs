@@ -2,8 +2,6 @@
 using Microsoft.Extensions.Logging;
 using Moq;
 using PaymentCard.Data.Services;
-using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
