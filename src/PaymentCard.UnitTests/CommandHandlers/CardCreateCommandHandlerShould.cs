@@ -6,6 +6,7 @@ using PaymentCard.API.AutoMapper;
 using PaymentCard.Contracts;
 using PaymentCard.Data.CommandHandlers;
 using PaymentCard.Data.Repositories;
+using PaymentCard.Domain;
 using static PaymentCard.Data.Commands.Commands;
 
 namespace PaymentCard.UnitTests.CommandHandlers
@@ -43,6 +44,7 @@ namespace PaymentCard.UnitTests.CommandHandlers
             await sut.Handle(new CardCreateCommand(data), new CancellationToken());
 
             //Assert
+            _mockCardRepository.Verify(x => x.Create(It.IsAny<IEnumerable<Card>>()), Times.Once);
             _mockCardRepository.Verify(x => x.SaveAsync(), Times.Once);
         }
     }

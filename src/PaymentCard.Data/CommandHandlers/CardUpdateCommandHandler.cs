@@ -27,8 +27,12 @@ namespace PaymentCard.Data.CommandHandlers
             _logger.LogInformation("{Handler}.{Action}( start", nameof(CardUpdateCommandHandler), nameof(Handle));
 
             var data = await _cardRepository.FindAsync(request.Id);
-            _mapper.Map(request.card, data);
-            await _cardRepository.SaveAsync();
+            if (data != null)
+            {
+                _mapper.Map(request.card, data);
+                await _cardRepository.SaveAsync();
+            }
+            
         }
     }
 }
