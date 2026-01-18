@@ -37,16 +37,24 @@ namespace PaymentCard.Data.QueryHandlers
 
             var availableBalanceInUsd = data.CreditLimit - data.Transactions.Sum(t => t.Amount);
             vm.AvailableBalanceInUsd = Math.Round(availableBalanceInUsd, 2, MidpointRounding.AwayFromZero);
-            // to calculate the converted available balance i need to know which transaction date to consider
 
-            if (data is not null && !string.IsNullOrWhiteSpace(request.currency))
+            if (!string.IsNullOrWhiteSpace(request.currency))
             {
-                var conversionResult = await _currencyConversionService.ConvertTransactionsToCurrencyAsync(request.currency, data.Transactions);
+                var conversionResult = await _currencyConversionService.ConvertAmountToCurrencyAsync(request.currency, availableBalanceInUsd, DateTime.Now);
                 vm.ExchangeRateUsed = conversionResult.exchangeRateUsed;
-                vm.TotalConvertedAmount = conversionResult.convertedAmount;
+                vm.AvailableBalanceConverted = conversionResult.convertedAmount;
                 vm.TargetCurrency = conversionResult.targetCurrency;
                 vm.ErrorMessage = conversionResult.errorMessage;
             }
+
+            /*
+            if (data is not null && !string.IsNullOrWhiteSpace(request.currency))
+            {
+                var conversionResult = await _currencyConversionService.ConvertTransactionsToCurrencyAsync(request.currency, data.Transactions);
+                vm.TotalConvertedAmount = conversionResult.convertedAmount;
+                vm.TargetCurrency = conversionResult.targetCurrency;
+                vm.ErrorMessage = conversionResult.errorMessage;
+            }*/
 
             return vm;
         }

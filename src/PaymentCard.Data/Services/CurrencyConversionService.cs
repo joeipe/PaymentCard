@@ -30,8 +30,8 @@ namespace PaymentCard.Data.Services
 
                 var selectedRate = exchangeRateResult?
                     .Where(r => r.CountryCurrencyDescription.ToLower() == targetCurrency.ToLower())
-                    .Where(r => r.RecordDate <= transaction.TransactionDate)
-                    .Where(r => r.RecordDate >= cutoffDate)
+                    //.Where(r => r.RecordDate <= transaction.TransactionDate)
+                    //.Where(r => r.RecordDate >= cutoffDate)
                     .OrderByDescending(r => r.RecordDate)
                     .FirstOrDefault();
 
@@ -52,7 +52,7 @@ namespace PaymentCard.Data.Services
             return (exchangeRateUsed, convertedAmountResult, targetCurrencyResult, errorMessageResult);
         }
 
-        public async Task<decimal> ConvertAmountToCurrencyAsync(string targetCurrency, decimal amount, DateTime transactionDate)
+        public async Task<(decimal? exchangeRateUsed, decimal? convertedAmount, string? targetCurrency, string? errorMessage)> ConvertAmountToCurrencyAsync(string targetCurrency, decimal amount, DateTime transactionDate)
         {
             var exchangeRateResult = await _currencyService.GetExchangeRatesAsync();
 
@@ -60,14 +60,19 @@ namespace PaymentCard.Data.Services
 
             var selectedRate = exchangeRateResult?
                 .Where(r => r.CountryCurrencyDescription.ToLower() == targetCurrency.ToLower())
-                .Where(r => r.RecordDate <= transactionDate)
-                .Where(r => r.RecordDate >= cutoffDate)
+                //.Where(r => r.RecordDate <= transactionDate)
+                //.Where(r => r.RecordDate >= cutoffDate)
                 .OrderByDescending(r => r.RecordDate)
                 .FirstOrDefault();
 
             var convertedAmount = selectedRate is not null ? Math.Round(amount * selectedRate.ExchangeRate, 2, MidpointRounding.AwayFromZero) : 0.0m;
 
-            return convertedAmount;
+            decimal? exchangeRateUsed = selectedRate?.ExchangeRate;
+            decimal? convertedAmountResult = convertedAmount != 0.0m ? Math.Round(convertedAmount, 2, MidpointRounding.AwayFromZero) : null;
+            string? targetCurrencyResult = targetCurrency.ToUpperInvariant();
+            string? errorMessageResult = convertedAmount == 0.0m ? $"No exchange rates found for currency {targetCurrency} within 6 months prior to transaction dates." : null;
+
+            return (exchangeRateUsed, convertedAmountResult, targetCurrencyResult, errorMessageResult);
         }
     }
 }
