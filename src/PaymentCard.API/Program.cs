@@ -48,6 +48,8 @@ public partial class Program
 
             builder.Services.AddExceptionConfiguration();
 
+            builder.Services.AddAuthenticationConfiguration(builder.Configuration);
+
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddSwaggerConfiguration();
 
@@ -58,6 +60,8 @@ public partial class Program
             app.UseHttpsRedirection();
 
             app.ApplySwagger();
+
+            app.ApplyAuth();
 
             app.RegisterCardsEndpoints();
             app.RegisterTransactionsEndpoints();

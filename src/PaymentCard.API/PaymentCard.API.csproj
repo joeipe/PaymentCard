@@ -1,13 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>7e1751e7-b63b-4672-978b-0c7eeb1c25be</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="16.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.2">
       <PrivateAssets>all</PrivateAssets>
