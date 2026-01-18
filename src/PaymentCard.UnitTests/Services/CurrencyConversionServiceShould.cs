@@ -19,7 +19,7 @@ namespace PaymentCard.UnitTests.Services
         }
 
         [Fact]
-        public async Task GetCardBalanceSuccessfully()
+        public async Task ConvertTransactionsToCurrencySuccessfully()
         {
             //Arrange
             var data = new List<TreasuryExchangeRateDto>
@@ -53,6 +53,38 @@ namespace PaymentCard.UnitTests.Services
             //Act
             var sut = new CurrencyConversionService(_mockLogger.Object, _mockCurrencyService.Object);
             var result = await sut.ConvertTransactionsToCurrencyAsync("Algeria-Dinar", transactionData);
+
+            //Assert
+            _mockCurrencyService.Verify(x => x.GetExchangeRatesAsync(), Times.Once);
+            result.exchangeRateUsed.Should().Be(140.0m);
+            result.convertedAmount.Should().Be(1960000m);
+            result.targetCurrency.Should().Be("ALGERIA-DINAR");
+            result.errorMessage.Should().BeNull();
+        }
+
+        [Fact]
+        public async Task ConvertAmountToCurrencySuccessfully()
+        {
+            //Arrange
+            var data = new List<TreasuryExchangeRateDto>
+            {
+                new TreasuryExchangeRateDto
+                {
+                    RecordDate = DateTime.Now.AddDays(-2),
+                    Country = "Algeria",
+                    Currency = "Dinar",
+                    CountryCurrencyDescription = "Algeria-Dinar",
+                    ExchangeRate = 140.0m,
+                    EffectiveDate = DateTime.Now.AddDays(-2),
+                    SourceLineNumber = 1
+                }
+            };
+
+            _mockCurrencyService.Setup(x => x.GetExchangeRatesAsync()).ReturnsAsync(data);
+
+            //Act
+            var sut = new CurrencyConversionService(_mockLogger.Object, _mockCurrencyService.Object);
+            var result = await sut.ConvertAmountToCurrencyAsync("Algeria-Dinar", 14000m, DateTime.Now);
 
             //Assert
             _mockCurrencyService.Verify(x => x.GetExchangeRatesAsync(), Times.Once);

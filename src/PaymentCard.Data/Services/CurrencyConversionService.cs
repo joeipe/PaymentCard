@@ -30,8 +30,8 @@ namespace PaymentCard.Data.Services
 
                 var selectedRate = exchangeRateResult?
                     .Where(r => r.CountryCurrencyDescription.ToLower() == targetCurrency.ToLower())
-                    //.Where(r => r.RecordDate <= transaction.TransactionDate)
-                    //.Where(r => r.RecordDate >= cutoffDate)
+                    .Where(r => r.RecordDate <= transaction.TransactionDate)
+                    .Where(r => r.RecordDate >= cutoffDate)
                     .OrderByDescending(r => r.RecordDate)
                     .FirstOrDefault();
 
@@ -52,7 +52,10 @@ namespace PaymentCard.Data.Services
             return (exchangeRateUsed, convertedAmountResult, targetCurrencyResult, errorMessageResult);
         }
 
-        public async Task<(decimal? exchangeRateUsed, decimal? convertedAmount, string? targetCurrency, string? errorMessage)> ConvertAmountToCurrencyAsync(string targetCurrency, decimal amount, DateTime transactionDate)
+        public async Task<(decimal? exchangeRateUsed, decimal? convertedAmount, string? targetCurrency, string? errorMessage)> ConvertAmountToCurrencyAsync(
+            string targetCurrency, 
+            decimal amount,
+            DateTime transactionDate)
         {
             var exchangeRateResult = await _currencyService.GetExchangeRatesAsync();
 
@@ -60,8 +63,8 @@ namespace PaymentCard.Data.Services
 
             var selectedRate = exchangeRateResult?
                 .Where(r => r.CountryCurrencyDescription.ToLower() == targetCurrency.ToLower())
-                //.Where(r => r.RecordDate <= transactionDate)
-                //.Where(r => r.RecordDate >= cutoffDate)
+                .Where(r => r.RecordDate <= transactionDate)
+                .Where(r => r.RecordDate >= cutoffDate)
                 .OrderByDescending(r => r.RecordDate)
                 .FirstOrDefault();
 
