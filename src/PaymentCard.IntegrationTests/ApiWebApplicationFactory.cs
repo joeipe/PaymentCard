@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Data.Sqlite;
@@ -26,7 +27,14 @@ namespace PaymentCard.IntegrationTests
 
             builder.ConfigureTestServices(services =>
             {
-                services.AddLogging(b => b.ClearProviders());
+                // Register a test authentication scheme so endpoints that require authorization succeed in tests.
+                services.AddAuthentication(options =>
+                services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = "Test";
+                    options.DefaultChallengeScheme = "Test";
+                })
+                .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>("Test", _ => { });
 
                 var descriptor = services.SingleOrDefault
                    (d => d.ServiceType == typeof(DbContextOptions<PaymentCardDbContext>));
