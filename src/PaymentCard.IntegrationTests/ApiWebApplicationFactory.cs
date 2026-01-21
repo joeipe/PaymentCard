@@ -29,7 +29,6 @@ namespace PaymentCard.IntegrationTests
             {
                 // Register a test authentication scheme so endpoints that require authorization succeed in tests.
                 services.AddAuthentication(options =>
-                services.AddAuthentication(options =>
                 {
                     options.DefaultAuthenticateScheme = "Test";
                     options.DefaultChallengeScheme = "Test";
