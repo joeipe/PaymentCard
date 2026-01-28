@@ -40,7 +40,7 @@ namespace PaymentCard.API.Configurations
 
                     // Run seeder AFTER migration
                     if (environment.IsDevelopment())
-                    { 
+                    {
                         var seeder = serviceScope.ServiceProvider.GetRequiredService<IDbSeeder>();
                         seeder.SeedAsync().GetAwaiter().GetResult();
                     }

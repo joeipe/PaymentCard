@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SharedKernel;
+﻿using SharedKernel;
 
 namespace PaymentCard.Domain
 {

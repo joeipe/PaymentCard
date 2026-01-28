@@ -1,7 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PaymentCard.Data.Seed
 {
@@ -43,7 +40,7 @@ namespace PaymentCard.Data.Seed
                     },
                     new Domain.PurchaseTransaction
                     {
-                        Id =2,
+                        Id = 2,
                         Description = "Online Subscription",
                         TransactionDate = new DateTime(2024, 2, 10),
                         Amount = 9.99m,

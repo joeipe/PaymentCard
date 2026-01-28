@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PaymentCard.Domain;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PaymentCard.Data.Configuration
 {
