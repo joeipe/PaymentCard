@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
+using PaymentCard.Application.Services;
 using PaymentCard.Contracts;
+using PaymentCard.Data.Repositories;
 using SharedKernel.Interfaces;
 using static PaymentCard.Application.Queries.Queries;
-using PaymentCard.Data.Repositories;
-using PaymentCard.Application.Services;
 
 namespace PaymentCard.Application.QueryHandlers
 {
