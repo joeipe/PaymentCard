@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
-using PaymentCard.Data.Services;
-using PaymentCard.Data.Services.models;
+using PaymentCard.Application.Services;
+using PaymentCard.Application.Services.models;
 using PaymentCard.Domain;
 
 namespace PaymentCard.UnitTests.Services

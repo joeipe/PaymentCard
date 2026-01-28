@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using PaymentCard.Domain;
 
-namespace PaymentCard.Data.Services
+namespace PaymentCard.Application.Services
 {
     public class CurrencyConversionService : ICurrencyConversionService
     {

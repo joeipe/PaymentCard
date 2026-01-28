@@ -1,7 +1,7 @@
 using PaymentCard.API.Configurations;
-using PaymentCard.Data.Queries;
+using PaymentCard.Application.Queries;
 using PaymentCard.Data.Repositories;
-using PaymentCard.Data.Services;
+using PaymentCard.Application.Services;
 using Serilog;
 using System.Net.Http.Headers;
 

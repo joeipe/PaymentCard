@@ -2,9 +2,9 @@
 using Microsoft.Extensions.Logging;
 using PaymentCard.Data.Repositories;
 using SharedKernel.Interfaces;
-using static PaymentCard.Data.Commands.Commands;
+using static PaymentCard.Application.Commands.Commands;
 
-namespace PaymentCard.Data.CommandHandlers
+namespace PaymentCard.Application.CommandHandlers
 {
     public class CardDeleteCommandHandler : ICommandHandler<CardDeleteCommand>
     {

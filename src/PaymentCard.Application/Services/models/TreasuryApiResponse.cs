@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PaymentCard.Data.Services.models
+namespace PaymentCard.Application.Services.models
 {
     public class TreasuryApiResponse
     {

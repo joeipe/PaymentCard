@@ -1,7 +1,7 @@
 ﻿using PaymentCard.Contracts;
 using SharedKernel.Interfaces;
 
-namespace PaymentCard.Data.Queries
+namespace PaymentCard.Application.Queries
 {
     public class Queries
     {

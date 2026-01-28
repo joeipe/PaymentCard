@@ -1,6 +1,6 @@
 ﻿using PaymentCard.Domain;
 
-namespace PaymentCard.Data.Services
+namespace PaymentCard.Application.Services
 {
     public interface ICurrencyConversionService
     {

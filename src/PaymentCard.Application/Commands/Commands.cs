@@ -1,7 +1,7 @@
 ﻿using PaymentCard.Contracts;
 using SharedKernel.Interfaces;
 
-namespace PaymentCard.Data.Commands
+namespace PaymentCard.Application.Commands
 {
     public class Commands
     {

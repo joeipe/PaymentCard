@@ -10,9 +10,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Moq;
 using PaymentCard.Data;
-using PaymentCard.Data.Services;
-using PaymentCard.Data.Services.models;
+using PaymentCard.Application.Services;
 using PaymentCard.Domain;
+using PaymentCard.Application.Services.models;
 
 namespace PaymentCard.IntegrationTests
 {

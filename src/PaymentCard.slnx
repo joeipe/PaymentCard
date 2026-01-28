@@ -4,6 +4,7 @@
     <Project Path="PaymentCard.UnitTests/PaymentCard.UnitTests.csproj" Id="4102271f-ed54-4bcb-93a5-3c9966853128" />
   </Folder>
   <Project Path="PaymentCard.API/PaymentCard.API.csproj" />
+  <Project Path="PaymentCard.Application/PaymentCard.Application.csproj" Id="ba34c654-3f62-4160-a601-d3af88e26c96" />
   <Project Path="PaymentCard.Contracts/PaymentCard.Contracts.csproj" />
   <Project Path="PaymentCard.Data/PaymentCard.Data.csproj" />
   <Project Path="PaymentCard.Domain/PaymentCard.Domain.csproj" />

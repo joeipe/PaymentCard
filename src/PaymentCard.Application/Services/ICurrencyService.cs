@@ -1,6 +1,6 @@
-﻿using PaymentCard.Data.Services.models;
+﻿using PaymentCard.Application.Services.models;
 
-namespace PaymentCard.Data.Services
+namespace PaymentCard.Application.Services
 {
     public interface ICurrencyService
     {

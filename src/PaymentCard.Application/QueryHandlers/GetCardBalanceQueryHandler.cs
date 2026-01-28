@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
 using PaymentCard.Contracts;
-using PaymentCard.Data.Repositories;
-using PaymentCard.Data.Services;
 using SharedKernel.Interfaces;
-using static PaymentCard.Data.Queries.Queries;
+using static PaymentCard.Application.Queries.Queries;
+using PaymentCard.Data.Repositories;
+using PaymentCard.Application.Services;
 
-namespace PaymentCard.Data.QueryHandlers
+namespace PaymentCard.Application.QueryHandlers
 {
     public class GetCardBalanceQueryHandler : IQueryHandler<GetCardBalanceQuery, CardBalanceResponse>
     {

@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
-using PaymentCard.Data.Services;
+using PaymentCard.Application.Services;
 using System.Net;
 using System.Text;
 

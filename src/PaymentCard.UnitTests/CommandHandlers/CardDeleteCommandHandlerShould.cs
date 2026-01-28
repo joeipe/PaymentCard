@@ -3,10 +3,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using PaymentCard.API.AutoMapper;
-using PaymentCard.Data.CommandHandlers;
+using PaymentCard.Application.CommandHandlers;
 using PaymentCard.Data.Repositories;
 using PaymentCard.Domain;
-using static PaymentCard.Data.Commands.Commands;
+using static PaymentCard.Application.Commands.Commands;
 
 namespace PaymentCard.UnitTests.CommandHandlers
 {

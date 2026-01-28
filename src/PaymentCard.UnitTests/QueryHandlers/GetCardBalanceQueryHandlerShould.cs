@@ -4,11 +4,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using PaymentCard.API.AutoMapper;
-using PaymentCard.Data.QueryHandlers;
+using PaymentCard.Application.QueryHandlers;
 using PaymentCard.Data.Repositories;
-using PaymentCard.Data.Services;
+using PaymentCard.Application.Services;
 using PaymentCard.Domain;
-using static PaymentCard.Data.Queries.Queries;
+using static PaymentCard.Application.Queries.Queries;
 
 namespace PaymentCard.UnitTests.QueryHandlers
 {
