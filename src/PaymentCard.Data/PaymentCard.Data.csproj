@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PaymentCard.Application\PaymentCard.Application.csproj" />
-    <ProjectReference Include="..\PaymentCard.Contracts\PaymentCard.Contracts.csproj" />
     <ProjectReference Include="..\PaymentCard.Domain\PaymentCard.Domain.csproj" />
   </ItemGroup>
 
