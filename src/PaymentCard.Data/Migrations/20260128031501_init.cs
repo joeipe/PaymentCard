@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -16,8 +17,8 @@ namespace PaymentCard.Data.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CardNumber = table.Column<string>(type: "TEXT", maxLength: 16, nullable: false),
-                    CreditLimit = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false)
+                    CardNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    CreditLimit = table.Column<decimal>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,9 +31,9 @@ namespace PaymentCard.Data.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Description = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
                     TransactionDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Amount = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
+                    Amount = table.Column<decimal>(type: "TEXT", nullable: false),
                     CardId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>

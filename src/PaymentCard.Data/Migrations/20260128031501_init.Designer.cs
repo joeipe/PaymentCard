@@ -11,7 +11,7 @@ using PaymentCard.Data;
 namespace PaymentCard.Data.Migrations
 {
     [DbContext(typeof(PaymentCardDbContext))]
-    [Migration("20260128024633_init")]
+    [Migration("20260128031501_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -28,11 +28,9 @@ namespace PaymentCard.Data.Migrations
 
                     b.Property<string>("CardNumber")
                         .IsRequired()
-                        .HasMaxLength(16)
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("CreditLimit")
-                        .HasPrecision(18, 2)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -47,7 +45,6 @@ namespace PaymentCard.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Amount")
-                        .HasPrecision(18, 2)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("CardId")
@@ -55,7 +52,6 @@ namespace PaymentCard.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("TransactionDate")
