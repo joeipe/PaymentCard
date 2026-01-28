@@ -24,15 +24,6 @@ namespace PaymentCard.Data.Configuration
                .WithOne(e => e.Card)
                .HasForeignKey(e => e.CardId)
                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasData(
-                new Card
-                {
-                    Id = 1,
-                    CardNumber = "1234567812345678",
-                    CreditLimit = 5000.00m
-                }
-            );
         }
     }
 }

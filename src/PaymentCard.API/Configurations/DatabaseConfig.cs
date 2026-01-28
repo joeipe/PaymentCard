@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PaymentCard.Data;
+using PaymentCard.Data.Seed;
 using Serilog;
 
 namespace PaymentCard.API.Configurations
@@ -36,6 +37,14 @@ namespace PaymentCard.API.Configurations
                 {
                     var dbContext = serviceScope?.ServiceProvider.GetRequiredService<PaymentCardDbContext>();
                     dbContext?.Database.Migrate();
+
+                    // Run seeder AFTER migration
+                    if (environment.IsDevelopment())
+                    { 
+                        var seeder = serviceScope.ServiceProvider.GetRequiredService<IDbSeeder>();
+                        seeder.SeedAsync().GetAwaiter().GetResult();
+                    }
+
                     break;
                 }
                 catch (Exception ex)
