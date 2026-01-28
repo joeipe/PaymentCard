@@ -1,6 +1,4 @@
-﻿using SharedKernel.Interfaces;
-
-namespace SharedKernel
+﻿namespace PaymentCard.Domain.Common
 {
     public class Entity : IEntity
     {

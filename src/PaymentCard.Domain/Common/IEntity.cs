@@ -1,4 +1,4 @@
-﻿namespace SharedKernel.Interfaces
+﻿namespace PaymentCard.Domain.Common
 {
     public interface IEntity
     {

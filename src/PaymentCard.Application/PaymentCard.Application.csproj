@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PaymentCard.Data\PaymentCard.Data.csproj" />
+    <PackageReference Include="AutoMapper" Version="16.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PaymentCard.Contracts\PaymentCard.Contracts.csproj" />
+    <ProjectReference Include="..\PaymentCard.Domain\PaymentCard.Domain.csproj" />
     <ProjectReference Include="..\SharedKernel\SharedKernel.csproj" />
   </ItemGroup>
 

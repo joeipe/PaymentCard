@@ -1,4 +1,5 @@
 using PaymentCard.API.Configurations;
+using PaymentCard.Application.Interfaces;
 using PaymentCard.Application.Queries;
 using PaymentCard.Application.Services;
 using PaymentCard.Data.Repositories;

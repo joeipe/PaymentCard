@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Moq;
-using PaymentCard.Application.Services;
+using PaymentCard.Application.Interfaces;
 using PaymentCard.Application.Services.models;
 using PaymentCard.Data;
 using PaymentCard.Domain;

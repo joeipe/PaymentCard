@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
+using PaymentCard.Application.Interfaces;
 using PaymentCard.Contracts;
-using PaymentCard.Data.Repositories;
 using SharedKernel.Interfaces;
 using static PaymentCard.Application.Queries.Queries;
 

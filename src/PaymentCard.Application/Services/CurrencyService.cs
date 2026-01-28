@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using PaymentCard.Application.Interfaces;
 using PaymentCard.Application.Services.models;
 using SharedKernel.Extensions;
 using System.Net;

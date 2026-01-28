@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PaymentCard.Application.Interfaces;
 using PaymentCard.Data;
-using PaymentCard.Data.Seed;
 using Serilog;
 
 namespace PaymentCard.API.Configurations

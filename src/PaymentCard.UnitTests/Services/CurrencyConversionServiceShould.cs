@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
+using PaymentCard.Application.Interfaces;
 using PaymentCard.Application.Services;
 using PaymentCard.Application.Services.models;
 using PaymentCard.Domain;

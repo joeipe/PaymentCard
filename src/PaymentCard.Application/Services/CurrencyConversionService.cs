@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using PaymentCard.Application.Interfaces;
 using PaymentCard.Domain;
 
 namespace PaymentCard.Application.Services

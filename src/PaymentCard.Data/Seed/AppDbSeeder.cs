@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PaymentCard.Application.Interfaces;
 
 namespace PaymentCard.Data.Seed
 {
