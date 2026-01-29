@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PaymentCard.Application.Interfaces.Data;
+using PaymentCard.Data.Shared;
 
 namespace PaymentCard.Data.Seeders
 {
     public class AppDbSeeder : IDbSeeder
     {
-        protected PaymentCardDbContext _dbContext;
+        protected DatabaseContext _dbContext;
 
-        public AppDbSeeder(PaymentCardDbContext dbContext)
+        public AppDbSeeder(DatabaseContext dbContext)
         {
             _dbContext = dbContext;
         }

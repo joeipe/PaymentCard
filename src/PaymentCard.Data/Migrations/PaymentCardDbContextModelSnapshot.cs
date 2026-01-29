@@ -3,13 +3,13 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PaymentCard.Data;
+using PaymentCard.Data.Shared;
 
 #nullable disable
 
 namespace PaymentCard.Data.Migrations
 {
-    [DbContext(typeof(PaymentCardDbContext))]
+    [DbContext(typeof(DatabaseContext))]
     partial class PaymentCardDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

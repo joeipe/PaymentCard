@@ -3,19 +3,9 @@
 namespace PaymentCard.Application.Interfaces.Data
 
 {
-    public interface ICardRepository
+    public interface ICardRepository : IRepository<Card>
     {
-        Task<Card?> FindAsync(int id);
-
-        Task<IEnumerable<Card>> GetAllAsync();
-
         Task<Card?> GetCardByIdWithTransactionsAsync(int id);
-
-        void Create(params IEnumerable<Card> items);
-
-        void Update(params IEnumerable<Card> items);
-
-        void Delete(params IEnumerable<Card> items);
 
         Task SaveAsync();
     }

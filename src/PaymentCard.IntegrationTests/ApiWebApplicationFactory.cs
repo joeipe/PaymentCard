@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using PaymentCard.Application.Interfaces.Services;
 using PaymentCard.Application.Services.models;
-using PaymentCard.Data;
+using PaymentCard.Data.Shared;
 using PaymentCard.Domain;
 
 namespace PaymentCard.IntegrationTests
@@ -36,7 +36,7 @@ namespace PaymentCard.IntegrationTests
                 .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>("Test", _ => { });
 
                 var descriptor = services.SingleOrDefault
-                   (d => d.ServiceType == typeof(DbContextOptions<PaymentCardDbContext>));
+                   (d => d.ServiceType == typeof(DbContextOptions<DatabaseContext>));
 
                 if (descriptor != null)
                 {
@@ -46,7 +46,7 @@ namespace PaymentCard.IntegrationTests
                 // Add DataContext using an in-memory database for testing.
                 var _connection = new SqliteConnection("Filename=:memory:");
                 _connection.Open();
-                services.AddDbContext<PaymentCardDbContext>(options =>
+                services.AddDbContext<DatabaseContext>(options =>
                     options.UseSqlite(_connection)
                 );
 
@@ -63,7 +63,7 @@ namespace PaymentCard.IntegrationTests
                 // Create a scope to obtain a reference to the database
                 using var scope = serviceProvider.CreateScope();
 
-                var db = scope.ServiceProvider.GetRequiredService<PaymentCardDbContext>();
+                var db = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
                 var logger = scope.ServiceProvider.GetRequiredService<ILogger<WebApplicationFactory<Program>>>();
 
                 // Ensure the database is created.
@@ -81,7 +81,7 @@ namespace PaymentCard.IntegrationTests
             });
         }
 
-        private void SeedInMemoryStore(PaymentCardDbContext context)
+        private void SeedInMemoryStore(DatabaseContext context)
         {
             if (context.Cards.Any())
                 return;

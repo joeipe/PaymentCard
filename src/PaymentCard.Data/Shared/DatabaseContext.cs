@@ -1,18 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PaymentCard.Domain;
 
-namespace PaymentCard.Data
+namespace PaymentCard.Data.Shared
 {
-    public class PaymentCardDbContext : DbContext
+    public class DatabaseContext : DbContext
     {
         public DbSet<Card> Cards { get; set; }
         public DbSet<PurchaseTransaction> PurchaseTransactions { get; set; }
 
-        public PaymentCardDbContext()
+        public DatabaseContext()
         {
         }
 
-        public PaymentCardDbContext(DbContextOptions<PaymentCardDbContext> options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options)
              : base(options)
         {
         }

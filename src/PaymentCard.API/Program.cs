@@ -5,6 +5,7 @@ using PaymentCard.Application.Queries;
 using PaymentCard.Application.Services;
 using PaymentCard.Data.Repositories;
 using PaymentCard.Data.Seeders;
+using PaymentCard.Data.Shared;
 using Serilog;
 using System.Net.Http.Headers;
 
@@ -39,6 +40,7 @@ public partial class Program
             builder.Services.AddDatabaseConfiguration(builder.Configuration);
             builder.Services.AddAutoMapperConfiguration();
             builder.Services.AddScoped<IDbSeeder, AppDbSeeder>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<ICardRepository, CardRepository>();
             builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
             builder.Services.AddScoped<ICurrencyConversionService, CurrencyConversionService>();

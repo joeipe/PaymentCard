@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PaymentCard.Data;
+using PaymentCard.Data.Shared;
 
 #nullable disable
 
 namespace PaymentCard.Data.Migrations
 {
-    [DbContext(typeof(PaymentCardDbContext))]
+    [DbContext(typeof(DatabaseContext))]
     [Migration("20260128031501_init")]
     partial class init
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PaymentCard.Application.Interfaces.Data;
-using PaymentCard.Data;
+using PaymentCard.Data.Shared;
 using Serilog;
 
 namespace PaymentCard.API.Configurations
@@ -17,7 +17,7 @@ namespace PaymentCard.API.Configurations
 
             var dbPath = Path.Combine(dataDir, "PaymentCardDb.db");
 
-            services.AddDbContext<PaymentCardDbContext>(options =>
+            services.AddDbContext<DatabaseContext>(options =>
                 options
                     .UseSqlite($"Data Source={dbPath}")
                     .LogTo(message => Log.Information(message), new[] { DbLoggerCategory.Database.Command.Name }, LogLevel.Information)
@@ -35,7 +35,7 @@ namespace PaymentCard.API.Configurations
             {
                 try
                 {
-                    var dbContext = serviceScope?.ServiceProvider.GetRequiredService<PaymentCardDbContext>();
+                    var dbContext = serviceScope?.ServiceProvider.GetRequiredService<DatabaseContext>();
                     dbContext?.Database.Migrate();
 
                     // Run seeder AFTER migration
