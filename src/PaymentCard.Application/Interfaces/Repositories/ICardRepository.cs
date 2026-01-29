@@ -1,15 +1,15 @@
 ﻿using PaymentCard.Domain;
 
-namespace PaymentCard.Application.Interfaces
+namespace PaymentCard.Application.Interfaces.Repositories
 
 {
     public interface ICardRepository
     {
-        Task<Card> FindAsync(int id);
+        Task<Card?> FindAsync(int id);
 
         Task<IEnumerable<Card>> GetAllAsync();
 
-        Task<Card> GetCardByIdWithTransactionsAsync(int id);
+        Task<Card?> GetCardByIdWithTransactionsAsync(int id);
 
         void Create(params IEnumerable<Card> items);
 

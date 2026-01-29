@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
-using PaymentCard.Application.Interfaces;
+using PaymentCard.Application.Interfaces.CQRS;
+using PaymentCard.Application.Interfaces.Repositories;
+using PaymentCard.Application.Interfaces.Services;
 using PaymentCard.Contracts;
-using SharedKernel.Interfaces;
 using static PaymentCard.Application.Queries.Queries;
 
 namespace PaymentCard.Application.QueryHandlers
@@ -34,16 +35,19 @@ namespace PaymentCard.Application.QueryHandlers
 
             var vm = _mapper.Map<CardBalanceResponse>(data);
 
-            var availableBalanceInUsd = data.CreditLimit - data.Transactions.Sum(t => t.Amount);
-            vm.AvailableBalanceInUsd = Math.Round(availableBalanceInUsd, 2, MidpointRounding.AwayFromZero);
-
-            if (!string.IsNullOrWhiteSpace(request.currency))
+            if (data is not null)
             {
-                var conversionResult = await _currencyConversionService.ConvertAmountToCurrencyAsync(request.currency, availableBalanceInUsd, DateTime.Now);
-                vm.ExchangeRateUsed = conversionResult.exchangeRateUsed;
-                vm.AvailableBalanceConverted = conversionResult.convertedAmount;
-                vm.TargetCurrency = conversionResult.targetCurrency;
-                vm.ErrorMessage = conversionResult.errorMessage;
+                var availableBalanceInUsd = data.CreditLimit - data.Transactions.Sum(t => t.Amount);
+                vm.AvailableBalanceInUsd = Math.Round(availableBalanceInUsd, 2, MidpointRounding.AwayFromZero);
+
+                if (!string.IsNullOrWhiteSpace(request.currency))
+                {
+                    var conversionResult = await _currencyConversionService.ConvertAmountToCurrencyAsync(request.currency, availableBalanceInUsd, DateTime.Now);
+                    vm.ExchangeRateUsed = conversionResult.exchangeRateUsed;
+                    vm.AvailableBalanceConverted = conversionResult.convertedAmount;
+                    vm.TargetCurrency = conversionResult.targetCurrency;
+                    vm.ErrorMessage = conversionResult.errorMessage;
+                }
             }
 
             /*

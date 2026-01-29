@@ -1,5 +1,5 @@
-﻿using PaymentCard.Contracts;
-using SharedKernel.Interfaces;
+﻿using PaymentCard.Application.Interfaces.CQRS;
+using PaymentCard.Contracts;
 
 namespace PaymentCard.Application.Queries
 {

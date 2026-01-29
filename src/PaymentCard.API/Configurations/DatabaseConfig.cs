@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PaymentCard.Application.Interfaces;
+using PaymentCard.Application.Interfaces.Seeders;
 using PaymentCard.Data;
 using Serilog;
 

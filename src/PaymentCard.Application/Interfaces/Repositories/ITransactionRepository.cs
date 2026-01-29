@@ -1,6 +1,6 @@
 ﻿using PaymentCard.Domain;
 
-namespace PaymentCard.Application.Interfaces
+namespace PaymentCard.Application.Interfaces.Repositories
 {
     public interface ITransactionRepository
     {

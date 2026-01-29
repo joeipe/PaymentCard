@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PaymentCard.Application.Interfaces;
+using PaymentCard.Application.Interfaces.Seeders;
 
-namespace PaymentCard.Data.Seed
+namespace PaymentCard.Data.Seeders
 {
     public class AppDbSeeder : IDbSeeder
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using PaymentCard.Application.Interfaces;
+using PaymentCard.Application.Interfaces.Repositories;
 using PaymentCard.Domain;
 
 namespace PaymentCard.Data.Repositories
@@ -18,7 +18,7 @@ namespace PaymentCard.Data.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<Card> FindAsync(int id)
+        public async Task<Card?> FindAsync(int id)
         {
             return await _dbContext.Cards.SingleOrDefaultAsync(e => e.Id == id);
         }
@@ -28,7 +28,7 @@ namespace PaymentCard.Data.Repositories
             return await _dbContext.Cards.ToListAsync();
         }
 
-        public async Task<Card> GetCardByIdWithTransactionsAsync(int id)
+        public async Task<Card?> GetCardByIdWithTransactionsAsync(int id)
         {
             _logger.LogInformation("{Repository}.{Action} start", nameof(CardRepository), nameof(GetCardByIdWithTransactionsAsync));
 

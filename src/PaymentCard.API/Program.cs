@@ -1,9 +1,11 @@
 using PaymentCard.API.Configurations;
-using PaymentCard.Application.Interfaces;
+using PaymentCard.Application.Interfaces.Repositories;
+using PaymentCard.Application.Interfaces.Seeders;
+using PaymentCard.Application.Interfaces.Services;
 using PaymentCard.Application.Queries;
 using PaymentCard.Application.Services;
 using PaymentCard.Data.Repositories;
-using PaymentCard.Data.Seed;
+using PaymentCard.Data.Seeders;
 using Serilog;
 using System.Net.Http.Headers;
 
