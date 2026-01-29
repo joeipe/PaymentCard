@@ -11,15 +11,18 @@ namespace PaymentCard.Application.CommandHandlers
     {
         private readonly ILogger<TransactionCreateCommandHandler> _logger;
         private readonly ITransactionRepository _transactionRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
         public TransactionCreateCommandHandler(
             ILogger<TransactionCreateCommandHandler> logger,
             ITransactionRepository transactionRepository,
+            IUnitOfWork unitOfWork,
             IMapper mapper)
         {
             _logger = logger;
             _transactionRepository = transactionRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
@@ -29,7 +32,7 @@ namespace PaymentCard.Application.CommandHandlers
 
             var data = _mapper.Map<PurchaseTransaction>(request.transaction);
             _transactionRepository.Create(data);
-            await _transactionRepository.SaveAsync();
+            await _unitOfWork.SaveAsync();
         }
     }
 }

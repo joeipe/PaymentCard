@@ -1,9 +1,4 @@
-﻿using PaymentCard.Domain;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PaymentCard.Application.Interfaces.Data
+﻿namespace PaymentCard.Application.Interfaces.Data
 {
     public interface IRepository<T>
     {

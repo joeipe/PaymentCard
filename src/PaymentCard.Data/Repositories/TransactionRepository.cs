@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using PaymentCard.Application.Interfaces.Data;
 using PaymentCard.Data.Shared;
 using PaymentCard.Domain;
@@ -18,11 +17,6 @@ namespace PaymentCard.Data.Repositories
         {
             _logger = logger;
             _dbContext = dbContext;
-        }
-
-        public async Task SaveAsync()
-        {
-            await _dbContext.SaveChangesAsync();
         }
     }
 }

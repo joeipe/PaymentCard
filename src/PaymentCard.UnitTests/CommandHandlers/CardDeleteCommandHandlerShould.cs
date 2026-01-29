@@ -14,12 +14,14 @@ namespace PaymentCard.UnitTests.CommandHandlers
     {
         private static Mock<ILogger<CardDeleteCommandHandler>> _mockLogger = null!;
         private static Mock<ICardRepository> _mockCardRepository = null!;
+        private static Mock<IUnitOfWork> _mockUnitOfWork = null!;
         private static IMapper _mapper = null!;
 
         public CardDeleteCommandHandlerShould()
         {
             _mockLogger = new Mock<ILogger<CardDeleteCommandHandler>>();
             _mockCardRepository = new Mock<ICardRepository>();
+            _mockUnitOfWork = new Mock<IUnitOfWork>();
 
             var mappingConfig = new MapperConfiguration(cfg =>
             {
@@ -42,12 +44,12 @@ namespace PaymentCard.UnitTests.CommandHandlers
             _mockCardRepository.Setup(x => x.FindAsync(It.IsAny<int>())).ReturnsAsync(card);
 
             // Act
-            var sut = new CardDeleteCommandHandler(_mockLogger.Object, _mockCardRepository.Object, _mapper);
+            var sut = new CardDeleteCommandHandler(_mockLogger.Object, _mockCardRepository.Object, _mockUnitOfWork.Object, _mapper);
             await sut.Handle(new CardDeleteCommand(card.Id), new CancellationToken());
 
             // Assert
             _mockCardRepository.Verify(x => x.Delete(It.IsAny<IEnumerable<Card>>()), Times.Once);
-            _mockCardRepository.Verify(x => x.SaveAsync(), Times.Once);
+            _mockUnitOfWork.Verify(x => x.SaveAsync(), Times.Once);
         }
 
         [Fact]
@@ -57,12 +59,12 @@ namespace PaymentCard.UnitTests.CommandHandlers
             _mockCardRepository.Setup(x => x.FindAsync(It.IsAny<int>())).ReturnsAsync((Card?)null);
 
             // Act
-            var sut = new CardDeleteCommandHandler(_mockLogger.Object, _mockCardRepository.Object, _mapper);
+            var sut = new CardDeleteCommandHandler(_mockLogger.Object, _mockCardRepository.Object, _mockUnitOfWork.Object, _mapper);
             await sut.Handle(new CardDeleteCommand(1), new CancellationToken());
 
             // Assert
             _mockCardRepository.Verify(x => x.Delete(It.IsAny<IEnumerable<Card>>()), Times.Never);
-            _mockCardRepository.Verify(x => x.SaveAsync(), Times.Never);
+            _mockUnitOfWork.Verify(x => x.SaveAsync(), Times.Never);
         }
     }
 }

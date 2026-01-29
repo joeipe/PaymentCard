@@ -10,15 +10,18 @@ namespace PaymentCard.Application.CommandHandlers
     {
         private readonly ILogger<CardUpdateCommandHandler> _logger;
         private readonly ICardRepository _cardRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
         public CardUpdateCommandHandler(
             ILogger<CardUpdateCommandHandler> logger,
             ICardRepository cardRepository,
+            IUnitOfWork unitOfWork,
             IMapper mapper)
         {
             _logger = logger;
             _cardRepository = cardRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
@@ -30,7 +33,7 @@ namespace PaymentCard.Application.CommandHandlers
             if (data != null)
             {
                 _mapper.Map(request.card, data);
-                await _cardRepository.SaveAsync();
+                await _unitOfWork.SaveAsync();
             }
         }
     }

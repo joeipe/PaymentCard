@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PaymentCard.Application.Interfaces.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using PaymentCard.Application.Interfaces.Data;
 
 namespace PaymentCard.Data.Shared
 {

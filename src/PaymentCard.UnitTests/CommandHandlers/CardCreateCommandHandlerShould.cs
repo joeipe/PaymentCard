@@ -15,12 +15,14 @@ namespace PaymentCard.UnitTests.CommandHandlers
     {
         private static Mock<ILogger<CardCreateCommandHandler>> _mockLogger = null!;
         private static Mock<ICardRepository> _mockCardRepository = null!;
+        private static Mock<IUnitOfWork> _mockUnitOfWork = null!;
         private static IMapper _mapper = null!;
 
         public CardCreateCommandHandlerShould()
         {
             _mockLogger = new Mock<ILogger<CardCreateCommandHandler>>();
             _mockCardRepository = new Mock<ICardRepository>();
+            _mockUnitOfWork = new Mock<IUnitOfWork>();
 
             var mappingConfig = new MapperConfiguration(cfg =>
             {
@@ -40,12 +42,12 @@ namespace PaymentCard.UnitTests.CommandHandlers
             };
 
             //Act
-            var sut = new CardCreateCommandHandler(_mockLogger.Object, _mockCardRepository.Object, _mapper);
+            var sut = new CardCreateCommandHandler(_mockLogger.Object, _mockCardRepository.Object, _mockUnitOfWork.Object, _mapper);
             await sut.Handle(new CardCreateCommand(data), new CancellationToken());
 
             //Assert
             _mockCardRepository.Verify(x => x.Create(It.IsAny<IEnumerable<Card>>()), Times.Once);
-            _mockCardRepository.Verify(x => x.SaveAsync(), Times.Once);
+            _mockUnitOfWork.Verify(x => x.SaveAsync(), Times.Once);
         }
     }
 }

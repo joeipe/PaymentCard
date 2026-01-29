@@ -15,12 +15,14 @@ namespace PaymentCard.UnitTests.CommandHandlers
     {
         private static Mock<ILogger<CardUpdateCommandHandler>> _mockLogger = null!;
         private static Mock<ICardRepository> _mockCardRepository = null!;
+        private static Mock<IUnitOfWork> _mockUnitOfWork = null!;
         private static IMapper _mapper = null!;
 
         public CardUpdateCommandHandlerShould()
         {
             _mockLogger = new Mock<ILogger<CardUpdateCommandHandler>>();
             _mockCardRepository = new Mock<ICardRepository>();
+            _mockUnitOfWork = new Mock<IUnitOfWork>();
 
             var mappingConfig = new MapperConfiguration(cfg =>
             {
@@ -48,13 +50,13 @@ namespace PaymentCard.UnitTests.CommandHandlers
             _mockCardRepository.Setup(x => x.FindAsync(existingCard.Id)).ReturnsAsync(existingCard);
 
             // Act
-            var sut = new CardUpdateCommandHandler(_mockLogger.Object, _mockCardRepository.Object, _mapper);
+            var sut = new CardUpdateCommandHandler(_mockLogger.Object, _mockCardRepository.Object, _mockUnitOfWork.Object, _mapper);
             await sut.Handle(new CardUpdateCommand(existingCard.Id, updateRequest), CancellationToken.None);
 
             // Assert - mapping changed the instance returned by FindAsync
             Assert.Equal(updateRequest.CreditLimit, existingCard.CreditLimit);
 
-            _mockCardRepository.Verify(x => x.SaveAsync(), Times.Once);
+            _mockUnitOfWork.Verify(x => x.SaveAsync(), Times.Once);
         }
 
         [Fact]
@@ -69,11 +71,11 @@ namespace PaymentCard.UnitTests.CommandHandlers
             };
 
             // Act
-            var sut = new CardUpdateCommandHandler(_mockLogger.Object, _mockCardRepository.Object, _mapper);
+            var sut = new CardUpdateCommandHandler(_mockLogger.Object, _mockCardRepository.Object, _mockUnitOfWork.Object, _mapper);
             await sut.Handle(new CardUpdateCommand(1, updateRequest), CancellationToken.None);
 
             // Assert
-            _mockCardRepository.Verify(x => x.SaveAsync(), Times.Never);
+            _mockUnitOfWork.Verify(x => x.SaveAsync(), Times.Never);
         }
     }
 }

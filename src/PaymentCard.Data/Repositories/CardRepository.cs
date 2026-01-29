@@ -30,10 +30,5 @@ namespace PaymentCard.Data.Repositories
 
             return cardData;
         }
-
-        public async Task SaveAsync()
-        {
-            await _dbContext.SaveChangesAsync();
-        }
     }
 }
