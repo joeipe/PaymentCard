@@ -1,6 +1,5 @@
 using PaymentCard.API.Configurations;
-using PaymentCard.Application.Interfaces.Repositories;
-using PaymentCard.Application.Interfaces.Seeders;
+using PaymentCard.Application.Interfaces.Data;
 using PaymentCard.Application.Interfaces.Services;
 using PaymentCard.Application.Queries;
 using PaymentCard.Application.Services;
@@ -28,7 +27,7 @@ public partial class Program
             if (!IsRunningIntegrationTests())
             {
                 builder.Host.UseSerilog((ctx, lc) => lc
-                .WriteTo.Console()
+                //.WriteTo.Console()
                 .ReadFrom.Configuration(ctx.Configuration));
             }
 

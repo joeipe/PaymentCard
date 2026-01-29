@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using PaymentCard.API.AutoMapper;
-using PaymentCard.Application.Interfaces.Repositories;
+using PaymentCard.Application.Interfaces.Data;
 using PaymentCard.Application.Interfaces.Services;
 using PaymentCard.Application.QueryHandlers;
 using PaymentCard.Domain;

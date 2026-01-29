@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
 using PaymentCard.Application.Interfaces.CQRS;
-using PaymentCard.Application.Interfaces.Repositories;
+using PaymentCard.Application.Interfaces.Data;
 using static PaymentCard.Application.Commands.Commands;
 
 namespace PaymentCard.Application.CommandHandlers

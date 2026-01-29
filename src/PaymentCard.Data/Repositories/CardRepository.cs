@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using PaymentCard.Application.Interfaces.Repositories;
+using PaymentCard.Application.Interfaces.Data;
 using PaymentCard.Domain;
 
 namespace PaymentCard.Data.Repositories

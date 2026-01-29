@@ -1,4 +1,4 @@
-﻿namespace PaymentCard.Application.Interfaces.Seeders
+﻿namespace PaymentCard.Application.Interfaces.Data
 {
     public interface IDbSeeder
     {
