@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using PaymentCard.Application.Interfaces.Services;
-using PaymentCard.Domain;
+using PaymentCard.Domain.PurchaseTransactions;
 
 namespace PaymentCard.Application.Services
 {

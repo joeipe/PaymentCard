@@ -1,4 +1,4 @@
-﻿using PaymentCard.Domain;
+﻿using PaymentCard.Domain.Cards;
 
 namespace PaymentCard.Application.Interfaces.Data
 

@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
-using PaymentCard.Contracts;
-using static PaymentCard.Application.Commands.Commands;
-using static PaymentCard.Application.Queries.Queries;
+using PaymentCard.Contracts.Cards;
+using static PaymentCard.Application.Cards.Commands.CardCommands;
+using static PaymentCard.Application.Cards.Queries.CardQueries;
 
 namespace PaymentCard.API.EndpointsHandler
 {

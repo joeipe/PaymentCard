@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using PaymentCard.Contracts;
+using PaymentCard.Contracts.PurchaseTransactions;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text.Json;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PaymentCard.Domain;
+using PaymentCard.Domain.Cards;
+using PaymentCard.Domain.PurchaseTransactions;
 
 namespace PaymentCard.Data.Shared
 {

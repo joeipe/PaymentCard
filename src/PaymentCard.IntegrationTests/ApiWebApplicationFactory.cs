@@ -12,7 +12,8 @@ using Moq;
 using PaymentCard.Application.Interfaces.Services;
 using PaymentCard.Application.Services.models;
 using PaymentCard.Data.Shared;
-using PaymentCard.Domain;
+using PaymentCard.Domain.Cards;
+using PaymentCard.Domain.PurchaseTransactions;
 
 namespace PaymentCard.IntegrationTests
 {

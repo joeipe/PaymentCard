@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using PaymentCard.Contracts;
-using PaymentCard.Domain;
+using PaymentCard.Contracts.Cards;
+using PaymentCard.Domain.Cards;
 
 namespace PaymentCard.API.AutoMapper
 {
