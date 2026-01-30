@@ -8,5 +8,6 @@
   <Project Path="PaymentCard.Contracts/PaymentCard.Contracts.csproj" />
   <Project Path="PaymentCard.Data/PaymentCard.Data.csproj" />
   <Project Path="PaymentCard.Domain/PaymentCard.Domain.csproj" />
+  <Project Path="PaymentCard.Infrastructure/PaymentCard.Infrastructure.csproj" Id="7245c02b-2fe0-4b3b-aa05-2383e493197e" />
   <Project Path="SharedKernel/SharedKernel.csproj" />
 </Solution>

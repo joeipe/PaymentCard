@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Moq;
 using PaymentCard.Application.Services;
+using PaymentCard.Infrastructure.Currency;
 using System.Net;
 using System.Text;
 

@@ -24,6 +24,7 @@
     <ProjectReference Include="..\PaymentCard.Application\PaymentCard.Application.csproj" />
     <ProjectReference Include="..\PaymentCard.Contracts\PaymentCard.Contracts.csproj" />
     <ProjectReference Include="..\PaymentCard.Data\PaymentCard.Data.csproj" />
+    <ProjectReference Include="..\PaymentCard.Infrastructure\PaymentCard.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

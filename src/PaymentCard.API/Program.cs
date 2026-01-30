@@ -1,11 +1,13 @@
 using PaymentCard.API.Configurations;
 using PaymentCard.Application.Cards.Queries;
 using PaymentCard.Application.Interfaces.Data;
+using PaymentCard.Application.Interfaces.Infrastructure;
 using PaymentCard.Application.Interfaces.Services;
 using PaymentCard.Application.Services;
 using PaymentCard.Data.Cards;
 using PaymentCard.Data.PurchaseTransactions;
 using PaymentCard.Data.Shared;
+using PaymentCard.Infrastructure.Currency;
 using Serilog;
 using System.Net.Http.Headers;
 

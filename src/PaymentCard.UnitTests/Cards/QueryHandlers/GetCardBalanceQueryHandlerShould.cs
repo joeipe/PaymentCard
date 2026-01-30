@@ -11,7 +11,7 @@ using PaymentCard.Domain.Cards;
 using PaymentCard.Domain.PurchaseTransactions;
 using static PaymentCard.Application.Cards.Queries.CardQueries;
 
-namespace PaymentCard.UnitTests.QueryHandlers
+namespace PaymentCard.UnitTests.Cards.QueryHandlers
 {
     public class GetCardBalanceQueryHandlerShould
     {

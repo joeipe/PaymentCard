@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
-using PaymentCard.Application.Interfaces.Services;
-using PaymentCard.Application.Services.models;
+using PaymentCard.Application.Interfaces.Infrastructure;
+using PaymentCard.Application.Models;
 using SharedKernel.Extensions;
 using System.Net;
 
-namespace PaymentCard.Application.Services
+namespace PaymentCard.Infrastructure.Currency
 {
     public class CurrencyService : ICurrencyService
     {

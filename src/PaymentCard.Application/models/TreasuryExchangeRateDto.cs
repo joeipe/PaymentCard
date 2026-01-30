@@ -1,7 +1,7 @@
 ﻿using SharedKernel.Services;
 using System.Text.Json.Serialization;
 
-namespace PaymentCard.Application.Services.models
+namespace PaymentCard.Application.Models
 {
     public class TreasuryExchangeRateDto
     {

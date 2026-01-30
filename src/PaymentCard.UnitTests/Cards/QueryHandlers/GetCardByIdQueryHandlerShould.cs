@@ -9,7 +9,7 @@ using PaymentCard.Application.Interfaces.Data;
 using PaymentCard.Domain.Cards;
 using static PaymentCard.Application.Cards.Queries.CardQueries;
 
-namespace PaymentCard.UnitTests.QueryHandlers
+namespace PaymentCard.UnitTests.Cards.QueryHandlers
 {
     public class GetCardByIdQueryHandlerShould
     {
