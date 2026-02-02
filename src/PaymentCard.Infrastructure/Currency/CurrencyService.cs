@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using PaymentCard.Application.Interfaces.Infrastructure;
 using PaymentCard.Application.Models;
-using SharedKernel.Extensions;
-using System.Net;
+using PaymentCard.Infrastructure.Network;
 
 namespace PaymentCard.Infrastructure.Currency
 {
@@ -10,13 +9,19 @@ namespace PaymentCard.Infrastructure.Currency
     {
         private readonly ILogger<CurrencyService> _logger;
         private readonly HttpClient _client;
+        private readonly IHttpClientWrapper _httpClientWrapper;
+        private readonly PolicyHolder _policyHolder;
 
         public CurrencyService(
             ILogger<CurrencyService> logger,
-            HttpClient client)
+            HttpClient client,
+            IHttpClientWrapper httpClientWrapper,
+            PolicyHolder policyHolder)
         {
             _logger = logger;
             _client = client;
+            _httpClientWrapper = httpClientWrapper;
+            _policyHolder = policyHolder;
         }
 
         public async Task<List<TreasuryExchangeRateDto>?> GetExchangeRatesAsync()
@@ -24,27 +29,13 @@ namespace PaymentCard.Infrastructure.Currency
             _logger.LogInformation("{Class}.{Action} start", nameof(CurrencyService), nameof(GetExchangeRatesAsync));
 
             var url = "/services/api/fiscal_service/v1/accounting/od/rates_of_exchange";
-            var response = await _client.GetAsync(url);
-            if (!response.IsSuccessStatusCode)
+            var response = await _policyHolder.PolicyWrap.ExecuteAsync(() =>
             {
-                // inspect the status code
-                if (response.StatusCode == HttpStatusCode.NotFound)
-                {
-                    _logger.LogInformation("The request cannot be found.");
-                    return default;
-                }
-                else if (response.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    _logger.LogInformation("Unauthorized");
-                    return default;
-                }
-                response.EnsureSuccessStatusCode();
-            }
+                return _client.GetAsync(url);
+            });
+            var ratesOfExchange = await _httpClientWrapper.ReadContentAsAsync<TreasuryApiResponse>(response);
 
-            var content = await response.Content.ReadAsStringAsync();
-            var contacts = content.OutputObject<TreasuryApiResponse>();
-
-            return contacts.Data;
+            return ratesOfExchange?.Data;
         }
     }
 }

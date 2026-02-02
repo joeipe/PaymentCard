@@ -8,6 +8,7 @@ using PaymentCard.Data.Cards;
 using PaymentCard.Data.PurchaseTransactions;
 using PaymentCard.Data.Shared;
 using PaymentCard.Infrastructure.Currency;
+using PaymentCard.Infrastructure.Network;
 using Serilog;
 using System.Net.Http.Headers;
 
@@ -46,6 +47,8 @@ public partial class Program
             builder.Services.AddScoped<ICardRepository, CardRepository>();
             builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
             builder.Services.AddScoped<ICurrencyConversionService, CurrencyConversionService>();
+            builder.Services.AddSingleton<PolicyHolder>();
+            builder.Services.AddScoped<IHttpClientWrapper, HttpClientWrapper>();
             builder.Services.AddHttpClient<ICurrencyService, CurrencyService>(client =>
             {
                 client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiClient:TreasuryUri") ?? "http://localhost");

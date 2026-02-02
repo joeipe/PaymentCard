@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PaymentCard.Application\PaymentCard.Application.csproj" />
+    <PackageReference Include="Polly" Version="8.6.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Network\" />
+    <ProjectReference Include="..\PaymentCard.Application\PaymentCard.Application.csproj" />
   </ItemGroup>
 
 </Project>
