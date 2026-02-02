@@ -98,14 +98,14 @@ namespace PaymentCard.Infrastructure.Network
                             logger.LogWarning("Circuit breaker opened due to unknown error.");
                         }
                     },
-                   onReset: () =>
-                   {
-                       logger.LogInformation("Circuit breaker reset");
-                   },
-                   onHalfOpen: () =>
-                   {
-                       logger.LogInformation("Circuit is half-open. Testing the waters...");
-                   });
+                    onReset: () =>
+                    {
+                        logger.LogInformation("Circuit breaker reset");
+                    },
+                    onHalfOpen: () =>
+                    {
+                        logger.LogInformation("Circuit is half-open. Testing the waters...");
+                    });
 
             //PolicyWrap = Policy.WrapAsync(_fallbackPolicy, _retryPolicy, _breakerPolicy);
             PolicyWrap = Policy.WrapAsync(_retryPolicy, _breakerPolicy);
