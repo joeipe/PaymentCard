@@ -1,3 +1,4 @@
+using Microsoft.ApplicationInsights.Extensibility;
 using PaymentCard.API.Configurations;
 using PaymentCard.Application.Cards.Queries;
 using PaymentCard.Application.Interfaces.Data;
@@ -30,13 +31,12 @@ public partial class Program
 
             if (!IsRunningIntegrationTests())
             {
+                builder.Services.AddApplicationInsightsConfiguration(builder.Environment);
+
                 builder.Host.UseSerilog((ctx, srv, lc) => lc
-                //.WriteTo.Console()
                 .ReadFrom.Configuration(ctx.Configuration)
                 .ReadFrom.Services(srv));
             }
-
-            builder.Services.AddApplicationInsightsConfiguration(builder.Environment);
 
             // Add services to the container.
             builder.Services.AddMediatR(cfg =>
