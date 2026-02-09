@@ -24,11 +24,11 @@ namespace PaymentCard.API
                 ["CorrelationId"] = Guid.NewGuid() // or from HttpContext
             }))
             {
-                _logger.LogInformation("Handling request");
+                _logger.LogInformation("Handling {RequestName}", typeof(TRequest).Name);
 
                 var response = await next();
 
-                _logger.LogInformation("Request handled");
+                _logger.LogInformation("Handled {RequestName}", typeof(TRequest).Name);
 
                 return response;
             }
