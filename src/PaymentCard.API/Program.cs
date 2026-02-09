@@ -35,6 +35,8 @@ public partial class Program
                 .ReadFrom.Configuration(ctx.Configuration));
             }
 
+            builder.Services.AddApplicationInsightsConfiguration(builder.Environment, builder.Configuration);
+
             // Add services to the container.
             builder.Services.AddMediatR(cfg =>
             {

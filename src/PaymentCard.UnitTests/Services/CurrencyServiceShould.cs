@@ -1,7 +1,11 @@
-﻿using FluentAssertions;
+﻿using AutoMapper;
+using FluentAssertions;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using PaymentCard.Infrastructure.Currency;
+using PaymentCard.Infrastructure.Network;
+using Serilog.Core;
 using System.Net;
 using System.Text;
 
@@ -10,6 +14,8 @@ namespace PaymentCard.UnitTests.Services
     public class CurrencyServiceShould
     {
         private readonly Mock<ILogger<CurrencyService>> _mockLogger = new();
+        private static IHttpClientWrapper _httpClientWrapper = new HttpClientWrapper(NullLogger<HttpClientWrapper>.Instance);
+        private static PolicyHolder _policyHolder = new PolicyHolder(NullLogger<PolicyHolder>.Instance);
 
         [Fact]
         public async Task GetExchangeRatesAsync_ReturnsData_OnSuccess()
@@ -39,7 +45,7 @@ namespace PaymentCard.UnitTests.Services
                 BaseAddress = new Uri("https://test")
             };
 
-            var sut = new CurrencyService(_mockLogger.Object, httpClient);
+            var sut = new CurrencyService(_mockLogger.Object, httpClient, _httpClientWrapper, _policyHolder);
 
             // Act
             var result = await sut.GetExchangeRatesAsync();
@@ -63,7 +69,7 @@ namespace PaymentCard.UnitTests.Services
                 BaseAddress = new Uri("https://test")
             };
 
-            var sut = new CurrencyService(_mockLogger.Object, httpClient);
+            var sut = new CurrencyService(_mockLogger.Object, httpClient, _httpClientWrapper, _policyHolder);
 
             // Act
             var result = await sut.GetExchangeRatesAsync();
@@ -83,7 +89,7 @@ namespace PaymentCard.UnitTests.Services
                 BaseAddress = new Uri("https://test")
             };
 
-            var sut = new CurrencyService(_mockLogger.Object, httpClient);
+            var sut = new CurrencyService(_mockLogger.Object, httpClient, _httpClientWrapper, _policyHolder);
 
             // Act & Assert
             await Assert.ThrowsAsync<HttpRequestException>(() => sut.GetExchangeRatesAsync());
