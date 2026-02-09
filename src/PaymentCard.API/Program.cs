@@ -1,4 +1,6 @@
+using MediatR;
 using Microsoft.ApplicationInsights.Extensibility;
+using PaymentCard.API;
 using PaymentCard.API.Configurations;
 using PaymentCard.Application.Cards.Queries;
 using PaymentCard.Application.Interfaces.Data;
@@ -39,6 +41,10 @@ public partial class Program
             }
 
             // Add services to the container.
+            builder.Services.AddTransient(
+                typeof(IPipelineBehavior<,>),
+                typeof(LoggingBehavior<,>)
+            );
             builder.Services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(typeof(CardQueries).Assembly);
