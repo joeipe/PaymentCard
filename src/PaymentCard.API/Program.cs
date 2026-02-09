@@ -30,10 +30,10 @@ public partial class Program
 
             if (!IsRunningIntegrationTests())
             {
-                builder.Host.UseSerilog((ctx, lc) => lc
+                builder.Host.UseSerilog((ctx, srv, lc) => lc
                 //.WriteTo.Console()
                 .ReadFrom.Configuration(ctx.Configuration)
-                .Enrich.WithProperty("ApplicationName", "payment card"));
+                .ReadFrom.Services(srv));
             }
 
             builder.Services.AddApplicationInsightsConfiguration(builder.Environment, builder.Configuration);
