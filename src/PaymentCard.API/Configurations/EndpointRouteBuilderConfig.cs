@@ -6,8 +6,8 @@ namespace PaymentCard.API.Configurations
     {
         public static void RegisterCardsEndpoints(this IEndpointRouteBuilder endpoints)
         {
-            var cardsEndpoints = endpoints.MapGroup("/cards")
-                .RequireAuthorization();
+            var cardsEndpoints = endpoints.MapGroup("/cards");
+                //.RequireAuthorization();
 
             cardsEndpoints.MapGet("", CardsHandler.GetCardsAsync)
                 .WithSummary("Get all cards");
@@ -32,8 +32,8 @@ namespace PaymentCard.API.Configurations
 
         public static void RegisterTransactionsEndpoints(this IEndpointRouteBuilder endpoints)
         {
-            var transactionsEndpoints = endpoints.MapGroup("/transactions")
-                .RequireAuthorization(); ;
+            var transactionsEndpoints = endpoints.MapGroup("/transactions");
+                //.RequireAuthorization();
 
             transactionsEndpoints.MapGet("", TransactionsHandler.GetTransactiosAsync)
                 .WithSummary("Get all transactions");

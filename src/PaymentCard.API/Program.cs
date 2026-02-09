@@ -32,7 +32,8 @@ public partial class Program
             {
                 builder.Host.UseSerilog((ctx, lc) => lc
                 //.WriteTo.Console()
-                .ReadFrom.Configuration(ctx.Configuration));
+                .ReadFrom.Configuration(ctx.Configuration)
+                .Enrich.WithProperty("ApplicationName", "payment card"));
             }
 
             builder.Services.AddApplicationInsightsConfiguration(builder.Environment, builder.Configuration);

@@ -14,7 +14,6 @@ namespace PaymentCard.API.Configurations
             {
                 services.AddApplicationInsightsTelemetry();
             }
-            
         }
     }
 }

@@ -32,8 +32,8 @@ namespace PaymentCard.Application.Services
 
                 var selectedRate = exchangeRateResult?
                     .Where(r => r.CountryCurrencyDescription.ToLower() == targetCurrency.ToLower())
-                    .Where(r => r.RecordDate <= transaction.TransactionDate)
-                    .Where(r => r.RecordDate >= cutoffDate)
+                    //.Where(r => r.RecordDate <= transaction.TransactionDate)
+                    //.Where(r => r.RecordDate >= cutoffDate)
                     .OrderByDescending(r => r.RecordDate)
                     .FirstOrDefault();
 
@@ -65,8 +65,8 @@ namespace PaymentCard.Application.Services
 
             var selectedRate = exchangeRateResult?
                 .Where(r => r.CountryCurrencyDescription.ToLower() == targetCurrency.ToLower())
-                .Where(r => r.RecordDate <= transactionDate)
-                .Where(r => r.RecordDate >= cutoffDate)
+                //.Where(r => r.RecordDate <= transactionDate)
+                //.Where(r => r.RecordDate >= cutoffDate)
                 .OrderByDescending(r => r.RecordDate)
                 .FirstOrDefault();
 
