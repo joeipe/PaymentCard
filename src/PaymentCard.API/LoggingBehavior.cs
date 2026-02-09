@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using System.Diagnostics;
 
 namespace PaymentCard.API
 {
@@ -35,5 +34,4 @@ namespace PaymentCard.API
             }
         }
     }
-
 }

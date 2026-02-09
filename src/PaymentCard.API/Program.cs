@@ -1,5 +1,4 @@
 using MediatR;
-using Microsoft.ApplicationInsights.Extensibility;
 using PaymentCard.API;
 using PaymentCard.API.Configurations;
 using PaymentCard.Application.Cards.Queries;

@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-
-namespace PaymentCard.API.Configurations
+﻿namespace PaymentCard.API.Configurations
 {
     public static class ApplicationInsightsConfig
     {

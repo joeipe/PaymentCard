@@ -1,11 +1,9 @@
-﻿using AutoMapper;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using PaymentCard.Infrastructure.Currency;
 using PaymentCard.Infrastructure.Network;
-using Serilog.Core;
 using System.Net;
 using System.Text;
 
